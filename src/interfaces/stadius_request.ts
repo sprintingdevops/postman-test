@@ -1,5 +1,5 @@
 export interface StadiusRequest {
-  headers: Record<string, string>;
-  body: Record<string, any>;
+  headers?: Record<string, string>;
+  body?: any;
   method: string;
 }

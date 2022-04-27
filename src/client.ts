@@ -53,7 +53,7 @@ export class Stadius {
 
   public async POST(
     url: string,
-    headers: Record<string, string>,
+    headers: Record<string, string> = {},
     body: any,
     attachments?: Record<string, string>,
   ): Promise<request.Response> {
