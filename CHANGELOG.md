@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.7
+## 1.0.8
 - Support Client instances
 - Add base URL
 - Add common headers
@@ -9,13 +9,10 @@
 - Extend documentation
 - Reduce code smells
 - Test suite generator is officially supported
-
-## 1.0.6
 - Exports schema generation
 - Makes body type more generic
 - Improved documentation and examples
 - Change license to MIT
-## 1.0.4
 - Adds jest generation from schema
 - Adds field hiding helper for sensitive or volatile fields
 
