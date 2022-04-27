@@ -5,20 +5,24 @@ describe('Test Runner', () => {
     {
       name: 'Sanity check success',
       url: 'www.dir.bg',
-      request: {method: 'GET', body: {}, headers: {}},
+      request: {method: 'GET'},
       response: {statusCode: 301},
     },
     {
       name: 'Sanity check not found',
       url: 'https://swapi.dev/api/people/131311',
-      request: {method: 'GET', body: {}, headers: {}},
+      request: {method: 'GET'},
       response: {statusCode: 404},
     },
     {
       name: 'Partial body check',
       url: 'https://swapi.dev/api/people/1',
-      request: {method: 'GET', body: {}, headers: {}},
-      response: {statusCode: 200, body: {name: 'Luke Skywalker', height: '172'}},
+      request: {method: 'GET'},
+      response: {
+        statusCode: 200,
+        body: {name: 'Luke Skywalker', height: '172'},
+        headers: {'x-frame-options': 'SAMEORIGIN'},
+      },
     },
   ]);
 });
