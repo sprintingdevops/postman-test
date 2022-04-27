@@ -17,7 +17,14 @@ export default function runTests(tests: TestSchema[]) {
     }
 
     if (response.body) {
-      expect(actualResult.body).toMatchObject(response.body);
+      const bodyType = typeof response.body;
+      if (bodyType === 'object' && !Array.isArray(response.body)) {
+        expect(actualResult.body).toMatchObject(response.body);
+      } else if (bodyType === 'string') {
+        expect(actualResult.text).toContain(response.body);
+      } else {
+        expect(actualResult.body).toEqual(response.body);
+      }
     }
 
     if (response.headers) {
