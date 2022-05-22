@@ -17,7 +17,7 @@ class Config {
     return Config.getBoolVal(process.env.LOG_TO_CONSOLE, true);
   }
 
-  private static getBoolVal(val: string, defaultVal: boolean) {
+  private static getBoolVal(val: string | undefined, defaultVal: boolean) {
     if (val === undefined) return defaultVal;
     return ["true", "1"].includes(val.toLocaleLowerCase());
   }

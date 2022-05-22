@@ -52,7 +52,7 @@ class Postman {
   }
   public async GET(
     url: string,
-    headers?: Record<string, string>
+    headers: Record<string, string> = {}
   ): Promise<request.Response> {
     const req: request.Test = request(url).get("");
     this.addHeaders(req, headers);
@@ -61,7 +61,7 @@ class Postman {
 
   public async DELETE(
     url: string,
-    headers?: Record<string, string>
+    headers: Record<string, string> = {}
   ): Promise<request.Response> {
     const req: request.Test = request(url).delete("");
     this.addHeaders(req, headers);
@@ -92,7 +92,12 @@ class Postman {
     return req;
   }
 
-  private print(req, res, headers, body) {
+  private print(
+    req: request.Request,
+    res: request.Response,
+    headers: Record<string, string> = {},
+    body: any
+  ) {
     /*const colorFgYellow = '\x1b[33m';
     const colorFgMagenta = '\x1b[35m';
     const colorFgReset = '\x1b[0m';*/
