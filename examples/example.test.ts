@@ -1,4 +1,4 @@
-import postman from "../helpers/postman";
+import postman from "../src/postman";
 describe("A Preman example collection", () => {
   it("Demonstrate how to make Preman GET request", async () => {
     const result = await postman.GET(
