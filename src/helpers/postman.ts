@@ -1,17 +1,22 @@
-import request from "supertest";
 import { Console } from "console";
-import Config from "./config";
 import fs from "fs";
+import request from "supertest";
 import util from "util";
+import Config from "./config";
 
 class Postman {
   private readonly myconsole;
+  private readonly inspectConfig = {
+    compact: false,
+    depth: 10,
+    maxArrayLength: 100,
+  };
 
   constructor() {
     this.myconsole = new Console({
       stdout: process.stdout,
       stderr: process.stderr,
-      inspectOptions: inspectConfig,
+      inspectOptions: this.inspectConfig,
     });
   }
 
@@ -131,7 +136,7 @@ class Postman {
         "-postman.log";
       fs.appendFileSync(
         logFile,
-        util.inspect(removeNewLines(logMessages), inspectConfig) + "\n"
+        util.inspect(removeNewLines(logMessages), this.inspectConfig) + "\n"
       );
     }
   }
@@ -180,8 +185,6 @@ class Postman {
 }
 
 export default new Postman();
-
-const inspectConfig = { compact: false, depth: 10, maxArrayLength: 100 };
 
 function removeNewLines(arr: any[]): any {
   return arr.filter((record) => record !== "\n");
