@@ -1,4 +1,4 @@
-import { Console } from 'console';
+import {Console} from 'console';
 import fs from 'fs';
 import request from 'supertest';
 import util from 'util';
@@ -9,8 +9,7 @@ function removeNewLines(arr: unknown[]): unknown[] {
 }
 
 function cleanUrl(url: string) {
-  return url.split('/').reverse().splice(0, 2).reverse()
-    .join('_');
+  return url.split('/').reverse().splice(0, 2).reverse().join('_');
 }
 class Postman {
   private readonly myconsole;
@@ -60,39 +59,25 @@ class Postman {
     return this.send(req, headers, body, attachments);
   }
 
-  public async GET(
-    url: string,
-    headers: Record<string, string> = {},
-  ): Promise<request.Response> {
+  public async GET(url: string, headers: Record<string, string> = {}): Promise<request.Response> {
     const req: request.Test = request(url).get('');
     Postman.addHeaders(req, headers);
     return this.send(req, headers);
   }
 
-  public async DELETE(
-    url: string,
-    headers: Record<string, string> = {},
-  ): Promise<request.Response> {
+  public async DELETE(url: string, headers: Record<string, string> = {}): Promise<request.Response> {
     const req: request.Test = request(url).delete('');
     Postman.addHeaders(req, headers);
     return this.send(req, headers);
   }
 
-  public async POST_FILE(
-    url: string,
-    headers: Record<string, string>,
-    file: string,
-    fieldName = 'file',
-  ) {
-    return this.POST(url, headers, {}, { [fieldName]: file });
+  public async POST_FILE(url: string, headers: Record<string, string>, file: string, fieldName = 'file') {
+    return this.POST(url, headers, {}, {[fieldName]: file});
   }
 
-  static addHeaders(
-    req: request.Test,
-    headers: Record<string, string>,
-  ): request.Test {
+  static addHeaders(req: request.Test, headers: Record<string, string>): request.Test {
     if (headers) {
-      for (const key in headers) {
+      for (const key of Object.keys(headers)) {
         req.set(key, headers[key]);
       }
     }
@@ -102,12 +87,7 @@ class Postman {
     return req;
   }
 
-  private print(
-    req: request.Request,
-    res: request.Response,
-    headers: Record<string, string> = {},
-    body: unknown = {},
-  ) {
+  private print(req: request.Request, res: request.Response, headers: Record<string, string> = {}, body: unknown = {}) {
     /* const colorFgYellow = '\x1b[33m';
     const colorFgMagenta = '\x1b[35m';
     const colorFgReset = '\x1b[0m'; */
@@ -121,21 +101,16 @@ class Postman {
     push({
       url: req.url,
       method: req.method,
-      ...(headers && Config.VERBOSE ? { headers } : {}),
-      ...(body ? { body } : {}),
+      ...(headers && Config.VERBOSE ? {headers} : {}),
+      ...(body ? {body} : {}),
     });
     push('RESPONSE:');
     push({
       status: res.status,
-      ...(res.headers && Config.VERBOSE ? { headers: res.headers } : {}),
+      ...(res.headers && Config.VERBOSE ? {headers: res.headers} : {}),
       // body: JSON.stringify(res.body),
-      ...(res.body ? { body: res.body } : {}),
-      ...(res.body
-      && !Array.isArray(res.body)
-      && !Object.keys(res.body).length
-      && res.text
-        ? { text: res.text }
-        : {}),
+      ...(res.body ? {body: res.body} : {}),
+      ...(res.body && !Array.isArray(res.body) && !Object.keys(res.body).length && res.text ? {text: res.text} : {}),
     });
     push('==================================================');
     if (Config.LOG_TO_CONSOLE) {
@@ -144,10 +119,7 @@ class Postman {
     if (Config.LOG_TO_FILES) {
       const logicalName = cleanUrl(req.url);
       const logFile = `./postman-logs/${Postman.getDateTime()}-${logicalName}-postman.log`;
-      fs.appendFileSync(
-        logFile,
-        `${util.inspect(removeNewLines(logMessages), this.inspectConfig)}\n`,
-      );
+      fs.appendFileSync(logFile, `${util.inspect(removeNewLines(logMessages), this.inspectConfig)}\n`);
     }
   }
 
@@ -182,11 +154,7 @@ class Postman {
       return len > 0 ? new Array(len).join('0') + val : val.toString();
     };
     const d = new Date();
-    const dformat = `${[
-      d.getFullYear(),
-      padLeft(d.getMonth()) + 1,
-      padLeft(d.getDate()),
-    ].join('-')}T${[
+    const dformat = `${[d.getFullYear(), padLeft(d.getMonth()) + 1, padLeft(d.getDate())].join('-')}T${[
       padLeft(d.getHours()),
       padLeft(d.getMinutes()),
       padLeft(d.getSeconds()),

@@ -14,6 +14,7 @@ npm run test
 ```
 
 ### Now do I run some tests only ?
+
 ```
 npm run test -- -t 'pattern here'
 ```
