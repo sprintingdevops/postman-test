@@ -32,7 +32,7 @@ class Postman {
   public async PATCH(
     url: string,
     headers: Record<string, string>,
-    body: Record<string, any>,
+    body: Record<string, unknown>,
   ): Promise<request.Response> {
     const req: request.Test = request(url).patch('');
     Postman.addHeaders(req, headers);
@@ -52,7 +52,7 @@ class Postman {
   public async POST(
     url: string,
     headers: Record<string, string>,
-    body: Record<string, any>,
+    body: Record<string, unknown>,
     attachments?: Record<string, string>,
   ): Promise<request.Response> {
     const req: request.Test = request(url).post('');
