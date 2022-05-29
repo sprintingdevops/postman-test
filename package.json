@@ -4,12 +4,14 @@
   "description": "API tests to work with APIs experimentally like with POSTMAN, but from source code",
   "main": "index.js",
   "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "console": "^0.7.2",
+    "openapi-request-validator": "^11.0.1",
+    "openapi-response-validator": "^11.0.1",
     "stream": "^0.0.2",
     "supertest": "^6.1.3"
   },
   "devDependencies": {
-    "@types/jest": "^27.5.1",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
