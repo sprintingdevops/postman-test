@@ -52,19 +52,19 @@ export default class OpenAPIValidator {
   validateRequest(method: string, url: string, headers: Record<string, unknown>, body: Record<string, unknown> = {}) {
     const key = OpenAPIValidator.generateKey(method, url);
     if (this.requestValidators[key] === undefined) {
-      throw new Error(`Unexisting API: ${key}`);
+      return [new Error(`Unexisting API: ${key}`)];
     }
 
-    return this.requestValidators[key].validateRequest({headers, body});
+    return this.requestValidators[key].validateRequest({headers, body})?.errors;
   }
 
   validateResponse(method: string, url: string, statusCode: number, response: unknown) {
     const key = OpenAPIValidator.generateKey(method, url);
     if (this.requestValidators[key] === undefined) {
-      throw new Error(`Unexisting API: ${key}`);
+      return [new Error(`Unexisting API: ${key}`)];
     }
 
-    return this.responseValidators[key].validateResponse(statusCode, response);
+    return this.responseValidators[key].validateResponse(statusCode, response)?.errors;
   }
 
   static async dereferenceSchema(schema: OpenAPISchema): Promise<JSONSchema> {

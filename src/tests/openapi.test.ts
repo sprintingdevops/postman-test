@@ -34,26 +34,23 @@ describe('OpenAPI Validator', () => {
       },
       {},
     );
-    expect(errors.errors.length).toBeGreaterThan(0);
+    expect(errors.length).toBeGreaterThan(0);
   });
 
   it('requests fail on unexisting api', async () => {
     const oav = new OpenAPIValidator();
     await oav.initializeFromSchema(schema as any);
-    try {
-      oav.validateRequest(
-        'post123',
-        path,
-        {
-          'X-Correlation-ID': 'foo',
-          'X-Request-ID': 'foo',
-          'X-Tenant-ID': 100,
-        },
-        {},
-      );
-    } catch (error: any) {
-      expect(error.toString()).toEqual('Error: Unexisting API: /api/v1/operation-post123');
-    }
+    const errors = oav.validateRequest(
+      'post123',
+      path,
+      {
+        'X-Correlation-ID': 'foo',
+        'X-Request-ID': 'foo',
+        'X-Tenant-ID': 100,
+      },
+      {},
+    );
+    expect(errors[0].toString()).toEqual('Error: Unexisting API: /api/v1/operation-post123');
   });
 
   /* 
@@ -70,7 +67,7 @@ describe('OpenAPI Validator', () => {
     const oav = new OpenAPIValidator();
     await oav.initializeFromSchema(schema as any);
     const errors = oav.validateResponse('post', path, 200, {status: {}, message: 12});
-    expect(errors.errors.length).toBeGreaterThan(0);
+    expect(errors.length).toBeGreaterThan(0);
   });
 
   it('responses fail on unexisting api', async () => {
