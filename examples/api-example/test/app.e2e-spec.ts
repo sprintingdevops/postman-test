@@ -52,16 +52,27 @@ describe('AppController (e2e)', () => {
   const validator = new OpenAPIValidator();
   const url = 'localhost:3000';
 
-  it('/ (GET)', async () => {
+  it('/ (GET) with swagger schema', async () => {
     const path = '/';
     await validator.initializeFromSchema(schema);
 
     const response = await client.GET(`${url}${path}`);
 
     const requestSwaggerErrors = validator.validateRequest('get', path, {});
-    const responseSwaggerErrors = validator.validateResponse('get', '/', response.statusCode, response.body);
+    const responseSwaggerErrors = validator.validateResponse('get', path, response.statusCode, response.body);
     expect(responseSwaggerErrors).not.toBeDefined();
     expect(requestSwaggerErrors).not.toBeDefined();
+    expect(response).toBeDefined();
+  });
+
+  it('/ (GET) with missing schema', async () => {
+    const path = '/unexisting-path';
+    await validator.initializeFromSchema(schema);
+
+    const response = await client.GET(`${url}${path}`);
+
+    const responseSwaggerErrors = validator.validateResponse('get', path, response.statusCode, response.body);
+    expect(responseSwaggerErrors.length).toEqual(1);
     expect(response).toBeDefined();
   });
 });
