@@ -1,7 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
-import { ExampleResponseDto } from './app.dto';
-import { AppService } from './app.service';
+import {Controller, Get} from '@nestjs/common';
+import {ApiResponse} from '@nestjs/swagger';
+import {ExampleResponseDto} from './app.dto';
+import {AppService} from './app.service';
 
 @Controller()
 export class AppController {
@@ -13,7 +13,7 @@ export class AppController {
     description: 'The record has been successfully created.',
     type: ExampleResponseDto,
   })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @ApiResponse({status: 403, description: 'Forbidden.'})
   getHello() {
     return this.appService.getHello();
   }

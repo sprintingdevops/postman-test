@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import {ApiProperty} from '@nestjs/swagger';
 
 export class ExampleResponseDto {
   @ApiProperty({
@@ -8,6 +8,6 @@ export class ExampleResponseDto {
     type: String,
   })
   message = 'success';
-  @ApiProperty({ required: true, type: Number })
+  @ApiProperty({required: true, type: Number})
   status = 200;
 }

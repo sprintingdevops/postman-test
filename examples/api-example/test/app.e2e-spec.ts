@@ -13,11 +13,11 @@ const schema: any = {
             description: 'The record has been successfully created.',
             content: {
               'application/json': {
-                schema: { $ref: '#/components/schemas/ExampleResponseDto' },
+                schema: {$ref: '#/components/schemas/ExampleResponseDto'},
               },
             },
           },
-          '403': { description: 'Forbidden.' },
+          '403': {description: 'Forbidden.'},
         },
       },
     },
@@ -28,7 +28,7 @@ const schema: any = {
     version: '1.0',
     contact: {},
   },
-  tags: [{ name: 'Preman Example', description: '' }],
+  tags: [{name: 'Preman Example', description: ''}],
   servers: [],
   components: {
     schemas: {
@@ -40,7 +40,7 @@ const schema: any = {
             readOnly: true,
             enum: ['success', 'failure'],
           },
-          status: { type: 'number' },
+          status: {type: 'number'},
         },
         required: ['message', 'status'],
       },
@@ -59,12 +59,7 @@ describe('AppController (e2e)', () => {
     const response = await client.GET(`${url}${path}`);
 
     const requestSwaggerErrors = validator.validateRequest('get', path, {});
-    const responseSwaggerErrors = validator.validateResponse(
-      'get',
-      '/',
-      response.statusCode,
-      response.body,
-    );
+    const responseSwaggerErrors = validator.validateResponse('get', '/', response.statusCode, response.body);
     expect(responseSwaggerErrors).not.toBeDefined();
     expect(requestSwaggerErrors).not.toBeDefined();
     expect(response).toBeDefined();
