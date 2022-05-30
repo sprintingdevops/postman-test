@@ -52,9 +52,13 @@ describe('AppController (e2e)', () => {
   const validator = new OpenAPIValidator();
   const url = 'localhost:3000';
 
+  beforeAll(async () => {
+    const response = await client.GET(`${url}/api-json`);
+    await validator.initializeFromSchema(response.body);
+  });
+
   it('/ (GET) with swagger schema', async () => {
     const path = '/';
-    await validator.initializeFromSchema(schema);
 
     const response = await client.GET(`${url}${path}`);
 
@@ -67,7 +71,6 @@ describe('AppController (e2e)', () => {
 
   it('/ (GET) with missing schema', async () => {
     const path = '/unexisting-path';
-    await validator.initializeFromSchema(schema);
 
     const response = await client.GET(`${url}${path}`);
 
