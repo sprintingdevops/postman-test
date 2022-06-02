@@ -6,6 +6,7 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
+    "@types/prettier": "^2.6.3",
     "console": "^0.7.2",
     "openapi-request-validator": "^11.0.1",
     "openapi-response-validator": "^11.0.1",
