@@ -1,5 +1,5 @@
 import OpenAPIValidator from '../../../src/openapi';
-import client from '../../../src/postman';
+import client from '../../../src/stadius';
 
 describe('AppController (e2e)', () => {
   const validator = new OpenAPIValidator();

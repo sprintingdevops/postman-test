@@ -11,7 +11,7 @@ function removeNewLines(arr: unknown[]): unknown[] {
 function cleanUrl(url: string) {
   return url.split('/').reverse().splice(0, 2).reverse().join('_');
 }
-class Postman {
+class Stadius {
   private readonly myconsole;
 
   private readonly inspectConfig = {
@@ -34,7 +34,7 @@ class Postman {
     body: Record<string, unknown>,
   ): Promise<request.Response> {
     const req: request.Test = request(url).patch('');
-    Postman.addHeaders(req, headers);
+    Stadius.addHeaders(req, headers);
     return this.send(req, headers, body);
   }
 
@@ -44,7 +44,7 @@ class Postman {
     body: Record<string, unknown>,
   ): Promise<request.Response> {
     const req: request.Test = request(url).put('');
-    Postman.addHeaders(req, headers);
+    Stadius.addHeaders(req, headers);
     return this.send(req, headers, body);
   }
 
@@ -55,19 +55,19 @@ class Postman {
     attachments?: Record<string, string>,
   ): Promise<request.Response> {
     const req: request.Test = request(url).post('');
-    Postman.addHeaders(req, headers);
+    Stadius.addHeaders(req, headers);
     return this.send(req, headers, body, attachments);
   }
 
   public async GET(url: string, headers: Record<string, string> = {}): Promise<request.Response> {
     const req: request.Test = request(url).get('');
-    Postman.addHeaders(req, headers);
+    Stadius.addHeaders(req, headers);
     return this.send(req, headers);
   }
 
   public async DELETE(url: string, headers: Record<string, string> = {}): Promise<request.Response> {
     const req: request.Test = request(url).delete('');
-    Postman.addHeaders(req, headers);
+    Stadius.addHeaders(req, headers);
     return this.send(req, headers);
   }
 
@@ -118,7 +118,7 @@ class Postman {
     }
     if (Config.LOG_TO_FILES) {
       const logicalName = cleanUrl(req.url);
-      const logFile = `./postman-logs/${Postman.getDateTime()}-${logicalName}-postman.log`;
+      const logFile = `./stadius-logs/${Stadius.getDateTime()}-${logicalName}-stadius.log`;
       fs.appendFileSync(logFile, `${util.inspect(removeNewLines(logMessages), this.inspectConfig)}\n`);
     }
   }
@@ -146,7 +146,7 @@ class Postman {
     return res;
   }
 
-  private printToFile = process.env.POSTMAN_LOG_TO_FILE;
+  private printToFile = process.env.STADIUS_LOG_TO_FILE;
 
   static getDateTime(): string {
     const padLeft = (val: number): string => {
@@ -163,4 +163,4 @@ class Postman {
   }
 }
 
-export default new Postman();
+export default new Stadius();

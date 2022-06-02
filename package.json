@@ -1,8 +1,9 @@
 {
-  "name": "ps-api-tests",
+  "name": "stadius",
   "version": "1.0.0",
-  "description": "API tests to work with APIs experimentally like with POSTMAN, but from source code",
-  "main": "index.js",
+  "description": "Utilities for easier and explorative testing",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "console": "^0.7.2",
@@ -30,7 +31,8 @@
   "scripts": {
     "test": "jest",
     "prepare": "husky install",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC"
