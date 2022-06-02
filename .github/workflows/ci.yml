@@ -1,4 +1,4 @@
-name: Preman CI
+name: Stadius CI
 
 on:
   push:

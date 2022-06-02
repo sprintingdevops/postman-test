@@ -1,4 +1,4 @@
-# Welcome to Preman
+# Welcome to Stadius
 
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Sprinting-Software_preman&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Sprinting-Software_preman)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Sprinting-Software_preman&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Sprinting-Software_preman)
@@ -6,14 +6,14 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Sprinting-Software_preman&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Sprinting-Software_preman)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Sprinting-Software_preman&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Sprinting-Software_preman)
 
-Preman was created to get out of the bad Postman habits where backend developers get stuck in the bad habit of investing manual testing and experimentation effort inside Postman without ever building up the value of a shared Postman collection.
-Preman is like Postman, but meant to be part of your source code.
+Stadius was created to get out of the bad Postman habits where backend developers get stuck in the bad habit of investing manual testing and experimentation effort inside Postman without ever building up the value of a shared Postman collection.
+Stadius is like Postman, but meant to be part of your source code.
 
-Preman's intent is to be used against live, running instances.
+Stadius's intent is to be used against live, running instances.
 With different configurations tests can be ran against different environments (e.g. vs DEV, UAT, PRD)
 Assertion's are provided by jest, but the developer experiance is enchanced by helper libraries.
 
-### How do I run preman suites ?
+### How do I run stadius suites ?
 
 ```
 npm run test
