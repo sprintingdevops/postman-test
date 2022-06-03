@@ -8,7 +8,7 @@
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "@types/prettier": "^2.6.3",
     "console": "^0.7.2",
-    "openapi-request-validator": "^11.0.1",
+    "openapi-request-validator": "^12.0.0",
     "openapi-response-validator": "^11.0.1",
     "stream": "^0.0.2",
     "supertest": "^6.2.3"
