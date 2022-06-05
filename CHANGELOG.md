@@ -2,7 +2,7 @@
 
 ## 1.0.4
 - Adds jest generation from schema
-- Adds field censorship helper for sensitive or volatile fields
+- Adds field hiding helper for sensitive or volatile fields
 
 
 ## 1.0.3
