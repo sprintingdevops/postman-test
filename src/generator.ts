@@ -4,7 +4,7 @@ import prettier from 'prettier';
 interface StadiusRequest {
   headers: Record<string, string>;
   body: Record<string, any>;
-  method: string; // TODO validate method
+  method: string;
 }
 
 interface StadiusResponse {
@@ -53,6 +53,11 @@ export class Generator {
   static generateRequestCall(url: string, request: StadiusRequest) {
     // GET doesn't have body so we need to add , <body> for everything which is not GET
     // const optionalBody = request.method !== 'GET' ? `, ${request.body}` ?? {} : '';
+    const allowedMethods: Record<string, boolean> = {GET: true, POST: true, PUT: true, DELETE: true};
+    if (!allowedMethods[request.method]) {
+      console.log('Unsupported method:', request.method, 'request:', request);
+      process.exit(1);
+    }
     if (request.method == 'GET') {
       return `const response = await client.${request.method}("${url}", ${JSON.stringify(request.headers)});`;
     } else {
