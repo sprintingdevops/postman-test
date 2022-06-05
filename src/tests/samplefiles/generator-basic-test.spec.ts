@@ -1,9 +1,10 @@
-import { client } from "stadius";
+import { client, hideFields } from "stadius";
 describe("generator-basic-test", () => {
   it("test 1", async () => {
     const response = await client.GET("https://swapi.dev/api/people/1", {});
     expect(response.statusCode).toBe(200);
-    expect(response.body).toMatchObject({
+    hideFields(response.body);
+    const expected = {
       name: "Luke Skywalker",
       height: "172",
       mass: "77",
@@ -31,7 +32,9 @@ describe("generator-basic-test", () => {
       created: "2014-12-09T13:50:51.644000Z",
       edited: "2014-12-20T21:17:56.891000Z",
       url: "https://swapi.dev/api/people/1/",
-    });
+    };
+    hideFields(expected);
+    expect(response.body).toMatchObject(expected);
   });
 
   it("test 2", async () => {

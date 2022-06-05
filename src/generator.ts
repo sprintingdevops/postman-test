@@ -47,12 +47,14 @@ export class Generator {
     if (isEmpty) {
       return '';
     }
-    return `expect(response.body).toMatchObject(${JSON.stringify(body)})`;
+    return `hideFields(response.body);
+     const expected = ${JSON.stringify(body)};
+     hideFields(expected);
+     expect(response.body).toMatchObject(expected)`;
   }
 
   static generateRequestCall(url: string, request: StadiusRequest) {
     // GET doesn't have body so we need to add , <body> for everything which is not GET
-    // const optionalBody = request.method !== 'GET' ? `, ${request.body}` ?? {} : '';
     const allowedMethods: Record<string, boolean> = {GET: true, POST: true, PUT: true, DELETE: true};
     if (!allowedMethods[request.method]) {
       console.log('Unsupported method:', request.method, 'request:', request);
@@ -70,7 +72,7 @@ export class Generator {
 
   static generateSuite(suiteName: string, tests: string[]) {
     return prettier.format(
-      `import { client } from "stadius";
+      `import { client, hideFields } from "stadius";
         describe("${suiteName}", () => {
             ${tests.join('\n')}
         });
