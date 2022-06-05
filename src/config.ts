@@ -19,6 +19,13 @@ class Config {
     return Config.getBoolVal(process.env.LOG_TO_CONSOLE, true);
   }
 
+  public static get HIDDEN_FIELDS() {
+    if (process.env.HIDDEN_FIELDS === undefined) {
+      return [];
+    }
+    return process.env.HIDDEN_FIELDS.split(',');
+  }
+
   private static getBoolVal(val: string | undefined, defaultVal: boolean) {
     if (val === undefined) return defaultVal;
     return ['true', '1'].includes(val.toLocaleLowerCase());
