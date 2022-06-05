@@ -9,7 +9,7 @@
     "@types/prettier": "^2.6.3",
     "console": "^0.7.2",
     "openapi-request-validator": "^12.0.0",
-    "openapi-response-validator": "^11.0.1",
+    "openapi-response-validator": "^12.0.0",
     "stream": "^0.0.2",
     "supertest": "^6.2.3"
   },
