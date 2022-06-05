@@ -54,6 +54,6 @@ describe('Test Generator', () => {
     const expectedText = fs.readFileSync(`${pathToSampleFiles}/${fileName}`, 'utf8');
     expect(generatedText).toEqual(expectedText);
 
-    // fs.unlinkSync(fileName);
+    fs.unlinkSync(fileName);
   });
 });
