@@ -42,9 +42,21 @@ Please navigate to ```examples/api-example``` for a demo.
 ### Test Generation
 Work in progress jest based test suite generation.
 
+### Utility Functions
+
+#### Field hiding
+Setting the ```HIDDEN_FIELDS``` environment variable to a comma separated list of field names and then using the ```hideFields``` utility function
+will replace all occurrences of these keys in an object and replace them with a suplied value, default xxx.
+
+```typescript
+const example = {a: 12, b: {a: 13}};
+hideFields(body); // after this call example will equal: {a: 'xxx', b: {a: 'xxx'}};
+```
+[More examples](src/tests/hideFields.test.ts)
+
 ## Configuration
 Stadius uses environment variables for the configuration.
-For compleate list of options please visit ```config.ts``` but the two most important ones are:
+For complete list of options please visit ```config.ts``` but the two most important ones are:
 ```
 VERBOSE_LOGGING - if set to true headers will also be logged. By default they are {}
 AUTH - if set the value will be added as Authorization header
