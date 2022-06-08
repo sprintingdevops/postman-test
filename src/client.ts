@@ -28,21 +28,13 @@ class Stadius {
     });
   }
 
-  public async PATCH(
-    url: string,
-    headers: Record<string, string>,
-    body: Record<string, unknown>,
-  ): Promise<request.Response> {
+  public async PATCH(url: string, headers: Record<string, string>, body: any): Promise<request.Response> {
     const req: request.Test = request(url).patch('');
     Stadius.addHeaders(req, headers);
     return this.send(req, headers, body);
   }
 
-  public async PUT(
-    url: string,
-    headers: Record<string, string>,
-    body: Record<string, unknown>,
-  ): Promise<request.Response> {
+  public async PUT(url: string, headers: Record<string, string>, body: any): Promise<request.Response> {
     const req: request.Test = request(url).put('');
     Stadius.addHeaders(req, headers);
     return this.send(req, headers, body);
@@ -51,7 +43,7 @@ class Stadius {
   public async POST(
     url: string,
     headers: Record<string, string>,
-    body: Record<string, unknown>,
+    body: any,
     attachments?: Record<string, string>,
   ): Promise<request.Response> {
     const req: request.Test = request(url).post('');
@@ -88,9 +80,6 @@ class Stadius {
   }
 
   private print(req: request.Request, res: request.Response, headers: Record<string, string> = {}, body: unknown = {}) {
-    /* const colorFgYellow = '\x1b[33m';
-    const colorFgMagenta = '\x1b[35m';
-    const colorFgReset = '\x1b[0m'; */
     const logMessages: unknown[] = [];
     const push = (obj: unknown) => {
       logMessages.push(obj);
@@ -154,12 +143,11 @@ class Stadius {
       return len > 0 ? new Array(len).join('0') + val : val.toString();
     };
     const d = new Date();
-    const dformat = `${[d.getFullYear(), padLeft(d.getMonth()) + 1, padLeft(d.getDate())].join('-')}T${[
+    return `${[d.getFullYear(), padLeft(d.getMonth()) + 1, padLeft(d.getDate())].join('-')}T${[
       padLeft(d.getHours()),
       padLeft(d.getMinutes()),
       padLeft(d.getSeconds()),
     ].join('.')}`;
-    return dformat;
   }
 }
 
