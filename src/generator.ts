@@ -1,19 +1,19 @@
 import fs from 'fs';
 import prettier from 'prettier';
 
-interface StadiusRequest {
+export interface StadiusRequest {
   headers: Record<string, string>;
   body: Record<string, any>;
   method: string;
 }
 
-interface StadiusResponse {
+export interface StadiusResponse {
   headers: Record<string, string>;
   body: Record<string, any>;
   status: number;
 }
 
-interface TestSchema {
+export interface TestSchema {
   name: string;
   url: string;
   request: StadiusRequest;
