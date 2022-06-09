@@ -1,5 +1,4 @@
-import OpenAPIValidator from '../../../src/openapi';
-import client from '../../../src/stadius';
+import {client, OpenAPIValidator} from 'stadius';
 
 describe('AppController (e2e)', () => {
   const validator = new OpenAPIValidator();
