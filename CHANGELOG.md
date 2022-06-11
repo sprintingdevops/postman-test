@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5
+- Exports schema generation
+- Makes body type more generic
+- Improved documentation and examples
+- Change license to MIT
 ## 1.0.4
 - Adds jest generation from schema
 - Adds field hiding helper for sensitive or volatile fields
