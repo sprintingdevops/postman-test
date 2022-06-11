@@ -1,0 +1,12 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "testEnvironment": "node",
+  "testRegex": ".spec.ts$",
+  "maxWorkers": "95%",
+  "transform": {
+    "^.+\\.ts$": "ts-jest"
+  },
+  "setupFiles": [],
+  "setupFilesAfterEnv": [],
+  "testTimeout": 60000
+}
