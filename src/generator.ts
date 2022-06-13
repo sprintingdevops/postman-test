@@ -1,27 +1,10 @@
 import fs from 'fs';
 import prettier from 'prettier';
-
-export interface StadiusRequest {
-  headers: Record<string, string>;
-  body: Record<string, any>;
-  method: string;
-}
-
-export interface StadiusResponse {
-  headers: Record<string, string>;
-  body: Record<string, any>;
-  status: number;
-}
-
-export interface TestSchema {
-  name: string;
-  url: string;
-  request: StadiusRequest;
-  response: StadiusResponse;
-}
+import {StadiusRequest, StadiusResponse, TestSchema} from '.';
 
 export class Generator {
   generate(suiteName: string, testSchemas: TestSchema[]) {
+    // TODO validate testschemas
     const tests = testSchemas.map(({name, url, request, response}) =>
       Generator.generateTest(name, url, request, response),
     );
