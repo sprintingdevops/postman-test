@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.5
+## 1.0.6
 - Exports schema generation
 - Makes body type more generic
 - Improved documentation and examples
