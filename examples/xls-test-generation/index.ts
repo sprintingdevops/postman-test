@@ -43,7 +43,7 @@ const buildResponse = (row: ExcelRow) => {
 
 const main = () => {
   // Convert XLS to JSON
-  exec('npx convert-excel-to-json --sourceFile=test-generation-miro-01.xlsx', (error, stdout, _stderr) => {
+  exec('npx convert-excel-to-json --sourceFile=stadius-xml-generation.xlsx', (error, stdout, _stderr) => {
     if (error) {
       console.log('Error converting excel to JSON:', error);
       return;
