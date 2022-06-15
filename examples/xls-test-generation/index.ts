@@ -1,7 +1,7 @@
 import {exec} from 'child_process';
 import {Generator, StadiusRequest, StadiusResponse} from 'stadius';
 
-interface excelRow {
+interface ExcelRow {
   A: string;
   B: string;
   C: string;
@@ -13,27 +13,27 @@ interface excelRow {
 const rowToField = {
   name: 'A',
   method: 'B',
-  url: 'C',
-  requestBody: 'D',
+  url: 'D',
+  requestBody: 'C',
   responseStatus: 'E',
   responseBody: 'F',
 };
 
-const buildRequest = (row: excelRow) => {
-  const method = row[rowToField.method as keyof excelRow];
+const buildRequest = (row: ExcelRow) => {
+  const method = row[rowToField.method as keyof ExcelRow];
   let request: StadiusRequest = {method, body: {}, headers: {}};
 
-  const body = row[rowToField.requestBody as keyof excelRow];
+  const body = row[rowToField.requestBody as keyof ExcelRow];
   if (body) {
     request.body = JSON.parse(body);
   }
   return request;
 };
 
-const buildResponse = (row: excelRow) => {
-  const status = parseInt(row[rowToField.responseStatus as keyof excelRow]);
+const buildResponse = (row: ExcelRow) => {
+  const status = parseInt(row[rowToField.responseStatus as keyof ExcelRow]);
   let response: StadiusResponse = {status, headers: {}, body: {}};
-  const body = row[rowToField.responseBody as keyof excelRow];
+  const body = row[rowToField.responseBody as keyof ExcelRow];
 
   if (body) {
     response.body = JSON.parse(body);
@@ -43,7 +43,7 @@ const buildResponse = (row: excelRow) => {
 
 const main = () => {
   // Convert XLS to JSON
-  exec('npx convert-excel-to-json --sourceFile=stadius-xml-generation.xlsx', (error, stdout, stderr) => {
+  exec('npx convert-excel-to-json --sourceFile=test-generation-miro-01.xlsx', (error, stdout, _stderr) => {
     if (error) {
       console.log('Error converting excel to JSON:', error);
       return;
