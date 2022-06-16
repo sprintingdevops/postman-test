@@ -1,4 +1,5 @@
 import {Console} from 'console';
+import * as dotenv from 'dotenv';
 import fs from 'fs';
 import request from 'supertest';
 import util from 'util';
@@ -21,6 +22,7 @@ class Stadius {
   };
 
   constructor() {
+    dotenv.config();
     this.myconsole = new Console({
       stdout: process.stdout,
       stderr: process.stderr,
@@ -97,12 +99,11 @@ class Stadius {
     push({
       status: res.status,
       ...(res.headers && Config.VERBOSE ? {headers: res.headers} : {}),
-      // body: JSON.stringify(res.body),
       ...(res.body ? {body: res.body} : {}),
       ...(res.body && !Array.isArray(res.body) && !Object.keys(res.body).length && res.text ? {text: res.text} : {}),
     });
     push('==================================================');
-    if (Config.LOG_TO_CONSOLE) {
+    if (!Config.SILENT) {
       this.myconsole.log(...logMessages);
     }
     if (Config.LOG_TO_FILES) {

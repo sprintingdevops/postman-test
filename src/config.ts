@@ -11,6 +11,10 @@ class Config {
     return Config.getBoolVal(process.env.VERBOSE_LOGGING, false);
   }
 
+  public static get SILENT(): boolean {
+    return Config.getBoolVal(process.env.SILENT, false);
+  }
+
   public static get LOG_TO_FILES() {
     return Config.getBoolVal(process.env.LOG_TO_FILES, false);
   }
