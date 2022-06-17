@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.7
+- Support Client instances
+- Add base URL
+- Add common headers
+- Add SILENT mode
+- Change verboce configuration parameter to VERBOSE
+- Extend documentation
+- Reduce code smells
+- Test suite generator is officially supported
+
 ## 1.0.6
 - Exports schema generation
 - Makes body type more generic
