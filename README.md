@@ -31,6 +31,18 @@ const response = await client.POST(
 
 ```
 
+#### Instance Clients
+Sometimes you may want to have several different clients with Base Urls and repeatable headers.
+For these cases stadius exports it's class stadius:
+
+```typescript
+import { Stadius } from "stadius";
+
+const customClient = new Staidus("myBaseUrl", {"X-Common-Header": "Headers that will be added to each request" });
+// NOTE: common headers are added **before** the request headers. You can override them for a single request if needed.
+
+```
+
 ### Swagger Validation
 
 Stadius also offers a swagger validation library.
@@ -40,7 +52,12 @@ This will allow to easily verify that the face of the API -> which is the Open A
 Please navigate to ```examples/api-example``` for a demo.
 
 ### Test Generation
-Work in progress jest based test suite generation.
+Stadius has a test generation module. Simply put it will generate one or more test suites based on a schema you pass.
+By itself this functionality is useful because the user can declare request/response pairs and can generate and regenerate tests on demand for different environments, etc.
+For a basic example please navigate to [the test](src/tests/generator.test.ts)
+
+The functionality is better when combined with an external source.
+Please navigate to [this example](examples/xls-test-generation) to see an example with generating tests from an excel document.
 
 ### Utility Functions
 
@@ -59,6 +76,7 @@ Stadius uses environment variables for the configuration.
 For complete list of options please visit ```config.ts``` but the two most important ones are:
 ```
 VERBOSE_LOGGING - if set to true headers will also be logged. By default they are {}
+SILENT - if set to true no log output will be made
 AUTH - if set the value will be added as Authorization header
 ```
 
