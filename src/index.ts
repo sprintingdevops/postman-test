@@ -1,4 +1,4 @@
-export {default as client} from './client';
+export {default as client, Stadius} from './client';
 export {Generator} from './generator';
 export {default as hideFields} from './hideFields';
 export {StadiusRequest} from './interfaces/stadius_request';

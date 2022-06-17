@@ -8,7 +8,7 @@ class Config {
   }
 
   public static get VERBOSE(): boolean {
-    return Config.getBoolVal(process.env.VERBOSE_LOGGING, false);
+    return Config.getBoolVal(process.env.VERBOSE, false);
   }
 
   public static get SILENT(): boolean {

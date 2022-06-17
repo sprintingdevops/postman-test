@@ -12,7 +12,7 @@ function removeNewLines(arr: unknown[]): unknown[] {
 function cleanUrl(url: string) {
   return url.split('/').reverse().splice(0, 2).reverse().join('_');
 }
-class Stadius {
+export class Stadius {
   private readonly myconsole;
 
   private readonly inspectConfig = {
@@ -21,7 +21,14 @@ class Stadius {
     maxArrayLength: 100,
   };
 
-  constructor() {
+  private getUrl(url: string) {
+    if (!url) {
+      throw 'Url is required';
+    }
+    return `${this.baseUrl}${url}`;
+  }
+
+  constructor(private readonly baseUrl = '', private readonly commonHeaders: Record<string, string> = {}) {
     dotenv.config();
     this.myconsole = new Console({
       stdout: process.stdout,
@@ -31,13 +38,15 @@ class Stadius {
   }
 
   public async PATCH(url: string, headers: Record<string, string>, body: any): Promise<request.Response> {
-    const req: request.Test = request(url).patch('');
+    const req: request.Test = request(this.getUrl(url)).patch('');
+    Object.assign(headers, this.commonHeaders);
     Stadius.addHeaders(req, headers);
     return this.send(req, headers, body);
   }
 
   public async PUT(url: string, headers: Record<string, string>, body: any): Promise<request.Response> {
-    const req: request.Test = request(url).put('');
+    const req: request.Test = request(this.getUrl(url)).put('');
+    Object.assign(headers, this.commonHeaders);
     Stadius.addHeaders(req, headers);
     return this.send(req, headers, body);
   }
@@ -48,25 +57,28 @@ class Stadius {
     body: any,
     attachments?: Record<string, string>,
   ): Promise<request.Response> {
-    const req: request.Test = request(url).post('');
+    const req: request.Test = request(this.getUrl(url)).post('');
+    Object.assign(headers, this.commonHeaders);
     Stadius.addHeaders(req, headers);
     return this.send(req, headers, body, attachments);
   }
 
   public async GET(url: string, headers: Record<string, string> = {}): Promise<request.Response> {
-    const req: request.Test = request(url).get('');
+    const req: request.Test = request(this.getUrl(url)).get('');
+    Object.assign(headers, this.commonHeaders);
     Stadius.addHeaders(req, headers);
     return this.send(req, headers);
   }
 
   public async DELETE(url: string, headers: Record<string, string> = {}): Promise<request.Response> {
-    const req: request.Test = request(url).delete('');
+    const req: request.Test = request(this.getUrl(url)).delete('');
+    Object.assign(headers, this.commonHeaders);
     Stadius.addHeaders(req, headers);
     return this.send(req, headers);
   }
 
   public async POST_FILE(url: string, headers: Record<string, string>, file: string, fieldName = 'file') {
-    return this.POST(url, headers, {}, {[fieldName]: file});
+    return this.POST(this.getUrl(url), headers, {}, {[fieldName]: file});
   }
 
   static addHeaders(req: request.Test, headers: Record<string, string>): request.Test {
