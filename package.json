@@ -12,7 +12,8 @@
     "openapi-request-validator": "^12.0.0",
     "openapi-response-validator": "^12.0.0",
     "stream": "^0.0.2",
-    "supertest": "^6.2.3"
+    "supertest": "^6.2.3",
+    "prettier": "^2.6.2"
   },
   "devDependencies": {
     "@types/jest": "^28.1.1",
