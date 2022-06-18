@@ -1,10 +1,11 @@
 import fs from 'fs';
 import prettier from 'prettier';
 import {StadiusRequest, StadiusResponse, TestSchema} from '.';
+import validateTestSchemas from './test_schema_validator';
 
 export class Generator {
   generate(suiteName: string, testSchemas: TestSchema[]) {
-    // TODO validate testschemas
+    validateTestSchemas(testSchemas);
     const tests = testSchemas.map(({name, url, request, response}) =>
       Generator.generateTest(name, url, request, response),
     );
