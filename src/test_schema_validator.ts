@@ -2,6 +2,13 @@ import {StadiusRequest} from './interfaces/stadius_request';
 import {StadiusResponse} from './interfaces/stadius_response';
 import {TestSchema} from './interfaces/test_schema';
 
+/*
+ Internal validation module that should be used for all schema injestors (generator and runner for now)
+
+ There are extra checks that may be added:
+ - Validate HTTP verb
+ - Deep validation of the body (both req/resp)
+*/
 export default function validateTestSchemas(tests: TestSchema[]): boolean {
   if (!Array.isArray(tests)) {
     throw new Error(`tests must be an array, passed: ${typeof tests}`);
