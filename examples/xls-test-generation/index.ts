@@ -13,8 +13,8 @@ interface ExcelRow {
 const rowToField = {
   name: 'A',
   method: 'B',
-  url: 'D',
-  requestBody: 'C',
+  url: 'C',
+  requestBody: 'D',
   responseStatus: 'E',
   responseBody: 'F',
 };
