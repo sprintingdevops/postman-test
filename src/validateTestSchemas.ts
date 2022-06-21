@@ -69,7 +69,6 @@ const checkForMandatoryKey = (keys: string[], key: string) => {
 };
 
 const validateResponse = (response: StadiusResponse) => {
-  const keys = Object.keys(response);
   const hasValidHeader = response.headers ? typeof response.headers === 'object' : false;
   const hasValidBody = response.body ? typeof response.body === 'object' : false;
   const hasValidStatus = response.statusCode ? typeof response.statusCode === 'number' : false;
