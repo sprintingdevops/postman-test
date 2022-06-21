@@ -9,10 +9,16 @@ describe('Test Runner', () => {
       response: {statusCode: 301},
     },
     {
-      name: 'Sanity check success',
-      url: 'www.dir.bg',
+      name: 'Sanity check not found',
+      url: 'https://swapi.dev/api/people/131311',
       request: {method: 'GET', body: {}, headers: {}},
-      response: {headers: {server: 'cloudflare'}},
+      response: {statusCode: 404},
+    },
+    {
+      name: 'Partial body check',
+      url: 'https://swapi.dev/api/people/1',
+      request: {method: 'GET', body: {}, headers: {}},
+      response: {statusCode: 200, body: {name: 'Luke Skywalker', height: '172'}},
     },
   ]);
 });

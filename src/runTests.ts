@@ -1,7 +1,10 @@
 import {client, TestSchema} from '.';
+import validateTestSchemas from './validateTestSchemas';
 
-export default function runTests(schema: TestSchema[]) {
-  it.each(schema)(`Executing test: %{1}`, async ({name, url, request, response}) => {
+export default function runTests(tests: TestSchema[]) {
+  validateTestSchemas(tests);
+
+  it.each(tests)('Executing test: $name', async ({name, url, request, response}) => {
     let actualResult;
     if (request.method === 'GET') {
       actualResult = await client.GET(url, request.headers);
@@ -14,11 +17,11 @@ export default function runTests(schema: TestSchema[]) {
     }
 
     if (response.body) {
-      expect(actualResult.body).toEqual(response.body);
+      expect(actualResult.body).toMatchObject(response.body);
     }
 
     if (response.headers) {
-      expect(actualResult.headers).toEqual(response.headers);
+      expect(actualResult.headers).toMatchObject(response.headers);
     }
   });
 }

@@ -10,7 +10,7 @@
 A set of easy to use, batteries included libraries to make your life easier when testing and exploring APIs.
 Stadius's intent is to be used against live, running instances.
 With different configurations tests can be run against different environments (e.g. vs DEV, UAT, PRD)
-Stadus is test runner and assertion library agnostic, but for now the generator is tested against jest.
+Staduis works with jest's test and assertion runner.
 
 ## Main functionalities
 
@@ -43,7 +43,62 @@ const customClient = new Staidus("myBaseUrl", {"X-Common-Header": "Headers that 
 
 ```
 
-### Swagger Validation
+#### Parametrized API Running
+Stadius helps you write more declarative tests and less code by offering a wrapper arround the ```test.each```.
+
+Calling the ```runTests``` method inside a ```describe``` block will run each test.
+You can view the type of the test [here](src/interfaces/test_schema.ts)
+
+The gist is that the Request's fields are mandatory, where as you can check as little (for example the statusCode) or as much (statusCode, headers, body) of the response as you want.
+
+This is the most minmimal example:
+```typescript
+describe('Test Runner Example test suite', () => {
+  runTests([
+    {
+      name: 'Sanity check - not found',
+      url: 'https://swapi.dev/api/people/131311',
+      request: {method: 'GET', body: {}, headers: {}},
+      response: {statusCode: 404},
+    },
+  ]);
+});
+```
+
+Upon executing these tests you will execute the following request:
+```
+++++++++++++++++++++++++++++++++++++++++++++++++++
+ REQUEST:
+ {
+  url: 'https://swapi.dev/api/people/131311',
+  method: 'GET',
+  body: {}
+}
+ RESPONSE:
+ {
+  status: 404,
+  body: {
+    detail: 'Not found'
+  }
+}
+ ==================================================
+```
+
+On test failure the name passed in the test is used:
+```
+ FAIL  myfile.test.ts
+  ● Test Runner › Executing test: Sanity check - not found
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: 201
+    Received: 404
+```
+
+
+You can view more examples in this [test suite](src/tests/runTests.test.ts)
+
+#### Swagger Validation
 
 Stadius also offers a swagger validation library.
 It parses an OpenAPI v3 document and offers methods that validate the request and response against the swagger definitions.
@@ -51,7 +106,8 @@ This will allow to easily verify that the face of the API -> which is the Open A
 
 Please navigate to ```examples/api-example``` for a demo.
 
-### Test Generation
+
+#### Test Generation
 Stadius has a test generation module. Simply put it will generate one or more test suites based on a schema you pass.
 By itself this functionality is useful because the user can declare request/response pairs and can generate and regenerate tests on demand for different environments, etc.
 For a basic example please navigate to [the test](src/tests/generator.test.ts)
@@ -59,11 +115,11 @@ For a basic example please navigate to [the test](src/tests/generator.test.ts)
 The functionality is better when combined with an external source.
 Please navigate to [this example](examples/xls-test-generation) to see an example with generating tests from an excel document.
 
-### Utility Functions
+#### Utility Functions
 
 #### Field hiding
 Setting the ```HIDDEN_FIELDS``` environment variable to a comma separated list of field names and then using the ```hideFields``` utility function
-will replace all occurrences of these keys in an object and replace them with a suplied value, default xxx.
+will replace all occurrences of these keys in an object and replace them with a supplied value, default xxx.
 
 ```typescript
 const example = {a: 12, b: {a: 13}};
@@ -80,8 +136,4 @@ SILENT - if set to true no log output will be made
 AUTH - if set the value will be added as Authorization header
 ```
 
-
-### What's the difference with pure jest or cypress ?
-
-Jest is used under the hood, however standard jest test suites usually run against new instances of the code or parts of the code.
-Cypress is an amazing tool. It's focus is mainly UI testing. You can test APIs with it but there are a lot of dependencies and functionalities that are plain and simply redundant.
+dotenv is integrated with stadius
