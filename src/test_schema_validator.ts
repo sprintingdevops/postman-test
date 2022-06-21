@@ -72,16 +72,11 @@ const validateRequest = (request: StadiusRequest) => {
 
 const validateResponse = (response: StadiusResponse) => {
   const keys = Object.keys(response);
-  const mandatoryKeys = ['headers', 'body', 'status'];
-  mandatoryKeys.forEach((key) => {
-    if (!keys.includes(key)) {
-      throw new Error(`${errorPrefix} missing mandatory key: ${key} `);
-    }
-  });
+  const hasValidHeader = response.headers ? typeof response.headers === 'object' : false;
+  const hasValidBody = response.body ? typeof response.body === 'object' : false;
+  const hasValidStatus = response.statusCode ? typeof response.statusCode === 'number' : false;
 
-  const hasWrongTypes =
-    typeof response.headers !== 'object' || typeof response.body !== 'object' || typeof response.status !== 'number';
-  if (hasWrongTypes) {
-    throw new Error(`${errorPrefix} wrong type in response: ${JSON.stringify(response)}`);
+  if (!hasValidBody && !hasValidHeader && !hasValidStatus) {
+    throw new Error(`${errorPrefix} response must have at least one valid field of: status, body, headers `);
   }
 };

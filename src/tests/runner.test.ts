@@ -6,13 +6,13 @@ describe('Test Runner', () => {
       name: 'Sanity check success',
       url: 'www.dir.bg',
       request: {method: 'GET', body: {}, headers: {}},
-      response: {status: 301, body: {}, headers: {}},
+      response: {statusCode: 301},
     },
     {
-      name: 'Sanity check failure',
+      name: 'Sanity check success',
       url: 'www.dir.bg',
       request: {method: 'GET', body: {}, headers: {}},
-      response: {status: 200, body: {}, headers: {}},
+      response: {headers: {server: 'cloudflare'}},
     },
   ]);
 });

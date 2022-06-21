@@ -17,10 +17,12 @@ export class Generator {
   static generateTest(testName: string, url: string, request: StadiusRequest, response: StadiusResponse) {
     request.body = request.body ?? {};
     request.headers = request.headers ?? {};
+    response.body = response.body ?? {};
+
     return `
             it("${testName}", async () =>{
                 ${Generator.generateRequestCall(url, request)}
-                expect(response.statusCode).toBe(${response.status});
+                expect(response.statusCode).toBe(${response.statusCode});
                 ${Generator.generateBodyValidation(response.body)}
             }) 
       `;

@@ -33,14 +33,14 @@ const testSchemas = [
       },
 
       headers: {},
-      status: 200,
+      statusCode: 200,
     },
   },
   {
     name: 'test 2',
     url: 'https://swapi.dev/api/people/2',
     request: {method: 'POST', body: {foo: 'Bar'}, headers: {}},
-    response: {body: {}, headers: {}, status: 405},
+    response: {body: {}, headers: {}, statusCode: 405},
   },
 ];
 

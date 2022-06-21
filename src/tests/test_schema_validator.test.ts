@@ -52,33 +52,7 @@ describe('Test Schema Validator', () => {
     // Validate response object
     [
       [{name: 'a', url: 'a', request: {headers: {}, body: {}, method: 'GET'}, response: {}} as any],
-      'Wrong Test Schema:  missing mandatory key: headers ',
-    ],
-    [
-      [{name: 'a', url: 'a', request: {headers: {}, body: {}, method: 'GET'}, response: {headers: {}}} as any],
-      'Wrong Test Schema:  missing mandatory key: body ',
-    ],
-    [
-      [
-        {
-          name: 'a',
-          url: 'a',
-          request: {headers: {}, body: {}, method: 'GET'},
-          response: {headers: {}, body: {}},
-        } as any,
-      ],
-      'Wrong Test Schema:  missing mandatory key: status ',
-    ],
-    [
-      [
-        {
-          name: 'a',
-          url: 'a',
-          request: {headers: {}, body: {}, method: 'GET'},
-          response: {headers: {}, body: {}, status: 'a'},
-        } as any,
-      ],
-      'Wrong Test Schema:  wrong type in response: {"headers":{},"body":{},"status":"a"}',
+      'Wrong Test Schema:  response must have at least one valid field of: status, body, headers ',
     ],
   ])('Wrong schema', (args, expected) => {
     expect(() => validateTestSchemas(args)).toThrow(expected);
@@ -90,13 +64,25 @@ describe('Test Schema Validator', () => {
         url: 'test',
         name: 'test',
         request: {headers: {}, body: {}, method: 'GET'},
-        response: {headers: {xheader: '123'}, body: [1, 2, 3], status: 200},
+        response: {headers: {xheader: '123'}, body: [1, 2, 3], statusCode: 200},
       },
       {
         url: 'test2',
         name: 'test2',
         request: {headers: {auth: '123'}, body: {foo: 'bar'}, method: 'POST'},
-        response: {headers: {xheader: '123'}, body: [1, 2, 3], status: 500},
+        response: {headers: {xheader: '123'}, body: [1, 2, 3], statusCode: 500},
+      },
+      {
+        url: 'test2',
+        name: 'test2',
+        request: {headers: {auth: '123'}, body: {foo: 'bar'}, method: 'POST'},
+        response: {statusCode: 500},
+      },
+      {
+        url: 'test2',
+        name: 'test2',
+        request: {headers: {auth: '123'}, body: {foo: 'bar'}, method: 'POST'},
+        response: {body: {foo: 'bar'}},
       },
     ];
     expect(validateTestSchemas(schema as any)).toBeTruthy();
