@@ -1,4 +1,4 @@
-import runTests from '../runner';
+import runTests from '../runTests';
 
 describe('Test Runner', () => {
   runTests([
