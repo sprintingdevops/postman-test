@@ -35,11 +35,7 @@ const validateTest = (test: TestSchema) => {
   }
   const keys = Object.keys(test);
   const mandatoryKeys = ['url', 'name', 'request', 'response'];
-  mandatoryKeys.forEach((key) => {
-    if (!keys.includes(key)) {
-      throw new Error(`${errorPrefix} missing mandatory key: ${key} `);
-    }
-  });
+  mandatoryKeys.forEach((key) => checkForMandatoryKey(keys, key));
 
   const hasInvalidBaseFields = typeof test.name !== 'string' || typeof test.url !== 'string';
   if (hasInvalidBaseFields) {
@@ -53,11 +49,7 @@ const validateTest = (test: TestSchema) => {
 const validateRequest = (request: StadiusRequest) => {
   const keys = Object.keys(request);
   const mandatoryKeys = ['headers', 'body', 'method'];
-  mandatoryKeys.forEach((key) => {
-    if (!keys.includes(key)) {
-      throw new Error(`${errorPrefix} missing mandatory key: ${key} `);
-    }
-  });
+  mandatoryKeys.forEach((key) => checkForMandatoryKey(keys, key));
 
   const hasWrongTypes =
     typeof request.headers !== 'object' || typeof request.body !== 'object' || typeof request.method !== 'string';
@@ -67,6 +59,12 @@ const validateRequest = (request: StadiusRequest) => {
 
   if (!allowedMethods[request.method]) {
     throw new Error(`${errorPrefix} unsupported method: ${request.method}`);
+  }
+};
+
+const checkForMandatoryKey = (keys: string[], key: string) => {
+  if (!keys.includes(key)) {
+    throw new Error(`${errorPrefix} missing mandatory key: ${key} `);
   }
 };
 
