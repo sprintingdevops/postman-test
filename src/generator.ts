@@ -1,7 +1,7 @@
 import fs from 'fs';
 import prettier from 'prettier';
 import {StadiusRequest, StadiusResponse, TestSchema} from '.';
-import validateTestSchemas from './test_schema_validator';
+import validateTestSchemas from './validateTestSchemas';
 
 export class Generator {
   generate(suiteName: string, testSchemas: TestSchema[]) {

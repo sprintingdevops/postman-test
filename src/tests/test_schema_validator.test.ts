@@ -1,4 +1,4 @@
-import validateTestSchemas from '../test_schema_validator';
+import validateTestSchemas from '../validateTestSchemas';
 
 describe('Test Schema Validator', () => {
   it('wrong argument type', () => {
