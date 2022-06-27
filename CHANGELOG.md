@@ -1,5 +1,8 @@
 # Changelog
-
+## 1.0.9
+- Loosen requirements for test runner's structs
+- Support multiple body types in the test runner's schema
+- Add more integration tests
 ## 1.0.8
 - Support Client instances
 - Add base URL
