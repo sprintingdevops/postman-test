@@ -46,34 +46,28 @@ const validateTest = (test: TestSchema) => {
   validateResponse(test.response);
 };
 
-const validateRequest = (request: StadiusRequest) => {
-  const keys = Object.keys(request);
-  const mandatoryKeys = ['headers', 'body', 'method'];
-  mandatoryKeys.forEach((key) => checkForMandatoryKey(keys, key));
-
-  const hasWrongTypes =
-    typeof request.headers !== 'object' || typeof request.body !== 'object' || typeof request.method !== 'string';
-  if (hasWrongTypes) {
-    throw new Error(`${errorPrefix} wrong type in request: ${JSON.stringify(request)}`);
-  }
-
-  if (!allowedMethods[request.method]) {
-    throw new Error(`${errorPrefix} unsupported method: ${request.method}`);
-  }
-};
-
 const checkForMandatoryKey = (keys: string[], key: string) => {
   if (!keys.includes(key)) {
     throw new Error(`${errorPrefix} missing mandatory key: ${key} `);
   }
 };
 
+const validateRequest = (request: StadiusRequest) => {
+  if (!allowedMethods[request.method]) {
+    throw new Error(`${errorPrefix} unsupported method: ${request.method}`);
+  }
+  const hasValidHeaders = request.headers !== undefined ? typeof request.headers === 'object' : true;
+
+  if (!hasValidHeaders) {
+    throw new Error(`${errorPrefix} wrong headers in request: ${JSON.stringify(request)}`);
+  }
+};
+
 const validateResponse = (response: StadiusResponse) => {
-  const hasValidHeader = response.headers ? typeof response.headers === 'object' : false;
-  const hasValidBody = response.body ? typeof response.body === 'object' : false;
+  const hasValidHeaders = response.headers ? typeof response.headers === 'object' : false;
   const hasValidStatus = response.statusCode ? typeof response.statusCode === 'number' : false;
 
-  if (!hasValidBody && !hasValidHeader && !hasValidStatus) {
+  if (!response.body && !hasValidHeaders && !hasValidStatus) {
     throw new Error(`${errorPrefix} response must have at least one valid field of: status, body, headers `);
   }
 };

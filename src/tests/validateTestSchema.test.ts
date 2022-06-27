@@ -24,30 +24,18 @@ describe('Test Schema Validator', () => {
       [{name: 'a', url: 1, request: {}, response: {}} as any],
       'Wrong Test Schema:  type of key is wrong. Test name: a, url: 1',
     ],
-    [[{name: 'a', url: 'a', request: {}, response: {}} as any], 'Wrong Test Schema:  missing mandatory key: headers '],
-    [
-      [{name: 'a', url: 'a', request: {headers: {}}, response: {}} as any],
-      'Wrong Test Schema:  missing mandatory key: body ',
-    ],
-    [
-      [{name: 'a', url: 'a', request: {headers: {}, body: {}}, response: {}} as any],
-      'Wrong Test Schema:  missing mandatory key: method ',
-    ],
     [
       [{name: 'a', url: 'a', request: {headers: {}, body: {}, method: 'a'}, response: {}} as any],
       'Wrong Test Schema:  unsupported method: a',
     ],
     [
-      [{name: 'a', url: 'a', request: {headers: 1, body: {}, method: 'a'}, response: {}} as any],
-      'Wrong Test Schema:  wrong type in request: {"headers":1,"body":{},"method":"a"}',
+      [{name: 'a', url: 'a', request: {headers: 1, body: {}, method: 'GET'}, response: {}} as any],
+      'Wrong Test Schema:  wrong headers in request: {"headers":1,"body":{},"method":"GET"}',
     ],
-    [
-      [{name: 'a', url: 'a', request: {headers: {}, body: 1, method: 'a'}, response: {}} as any],
-      'Wrong Test Schema:  wrong type in request: {"headers":{},"body":1,"method":"a"}',
-    ],
+
     [
       [{name: 'a', url: 'a', request: {headers: {}, body: {}, method: 12}, response: {}} as any],
-      'Wrong Test Schema:  wrong type in request: {"headers":{},"body":{},"method":12}',
+      'Wrong Test Schema:  unsupported method: 12',
     ],
     // Validate response object
     [
