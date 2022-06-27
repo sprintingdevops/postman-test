@@ -18,7 +18,7 @@ jest.mock('supertest', () => {
   };
 });
 
-describe('test client', () => {
+describe('sanity check client', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
