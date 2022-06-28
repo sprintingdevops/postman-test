@@ -1,6 +1,6 @@
 ## Working with this example
 
-This example shows off how to work with Stadius and the swagger validation library.
+This example shows off how to work with Stadius's test runner.
 Stadius's intent is to run against a live system, therefore the project itself must run before the test script.
 
 First install the dependencies for this project and run it in development mode:
