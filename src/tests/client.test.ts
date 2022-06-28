@@ -1,4 +1,4 @@
-import {default as _request} from 'supertest';
+import 'supertest';
 import client from '../client';
 let field = jest.fn();
 let attach = jest.fn();
