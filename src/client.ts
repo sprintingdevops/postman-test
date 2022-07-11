@@ -1,6 +1,7 @@
 import {Console} from 'console';
 import * as dotenv from 'dotenv';
 import fs from 'fs';
+import {encode, ParsedUrlQueryInput} from 'querystring';
 import request from 'supertest';
 import util from 'util';
 import Config from './config';
@@ -63,7 +64,14 @@ export class Stadius {
     return this.send(req, headers, body, attachments);
   }
 
-  public async GET(url: string, headers: Record<string, string> = {}): Promise<request.Response> {
+  public async GET(
+    url: string,
+    headers: Record<string, string> = {},
+    queryParams?: ParsedUrlQueryInput,
+  ): Promise<request.Response> {
+    if (queryParams && Object.keys(queryParams).length > 0) {
+      url += encode(queryParams);
+    }
     const req: request.Test = request(this.getUrl(url)).get('');
     Object.assign(headers, this._commonHeaders);
     Stadius.addHeaders(req, headers);

@@ -25,7 +25,7 @@ export default function runTests(tests: TestSchema[]) {
 
 const getResult = async ({url, request}: TestSchema) => {
   if (request.method === 'GET') {
-    return client.GET(url, request.headers);
+    return client.GET(url, request.headers, request.body);
   } else if (request.method === 'POST') {
     return client.POST(url, request.headers, request.body);
   } else if (request.method === 'PUT') {
