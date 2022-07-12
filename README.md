@@ -16,19 +16,28 @@ Staduis works with jest's test and assertion runner.
 
 ### Client Library
 
-Stadius offers a request library based on ```supertest request```, but enhances it with verbose logging
-
+Stadius offers a request library based on ```supertest request```, but enhances it with verbose logging, dotenv support and configuration goodies(see below)
 a few examples:
 ```typescript
 import { client } from "stadius";
 
 await client.GET("https://my.api.dev", {})
 const response = await client.POST(
-      "https://my.api.dev/postable", // url
+      "https://my.api.dev/user", // url
       {'My Header': '123}, // headers
       { foo: "Bar" } // body
     );
 
+const response = await client.PUT(
+      "https://my.api.dev/user", // url
+      {'My Header': '123}, // headers
+      { foo: "Bar" } // body
+    );
+
+const response = await client.DELETE(
+      "https://my.api.dev/user", // url
+      {'My Header': '123}, // headers
+    );
 ```
 
 #### Instance Clients
@@ -51,7 +60,7 @@ You can view the type of the test [here](src/interfaces/test_schema.ts)
 
 The gist is that the Request's fields are mandatory, where as you can check as little (for example the statusCode) or as much (statusCode, headers, body) of the response as you want.
 
-This is the most minmimal example:
+This is the most minimal example:
 ```typescript
 describe('Test Runner Example test suite', () => {
   runTests([
