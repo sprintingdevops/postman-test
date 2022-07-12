@@ -1,7 +1,6 @@
 import {Console} from 'console';
 import * as dotenv from 'dotenv';
 import fs from 'fs';
-import {encode, ParsedUrlQueryInput} from 'querystring';
 import request from 'supertest';
 import util from 'util';
 import Config from './config';
@@ -67,10 +66,20 @@ export class Stadius {
   public async GET(
     url: string,
     headers: Record<string, string> = {},
-    queryParams?: ParsedUrlQueryInput,
+    // Typically the user should handle query params before calling stadius since they are uncommon outside GET.
+    // For get they are supported. As per specification accepted search query is string only
+    // For more complicated query strings the user can construct them and pass them to the URL.
+    queryParams?: Record<string, string>,
   ): Promise<request.Response> {
     if (queryParams && Object.keys(queryParams).length > 0) {
-      url += encode(queryParams);
+      const urlWithParams = new URL(url);
+      Object.keys(queryParams).forEach((key) => {
+        const value = queryParams[key];
+        if (typeof value === 'string') {
+          urlWithParams.searchParams.append(key, value);
+        }
+      });
+      url = urlWithParams.toString();
     }
     const req: request.Test = request(this.getUrl(url)).get('');
     Object.assign(headers, this._commonHeaders);

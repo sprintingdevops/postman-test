@@ -21,6 +21,7 @@ describe('sanity check client', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
+
   it('test GET', async () => {
     await client.GET('fakeurl', {foo: 'bar'});
     expect(send).toBeCalled();
