@@ -1,6 +1,6 @@
 {
   "name": "stadius",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Utilities for easier and explorative testing",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

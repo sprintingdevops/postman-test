@@ -1,4 +1,8 @@
 # Changelog
+
+## 1.0.10
+- Greatly reduce package size after installation
+- Improve test runner - add query parameters, improve the types
 ## 1.0.9
 - Loosen requirements for test runner's structs
 - Support multiple body types in the test runner's schema
