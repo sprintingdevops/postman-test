@@ -31,8 +31,8 @@ const buildRequest = (row: ExcelRow) => {
 };
 
 const buildResponse = (row: ExcelRow) => {
-  const status = parseInt(row[rowToField.responseStatus as keyof ExcelRow]);
-  let response: StadiusResponse = {status, headers: {}, body: {}};
+  const statusCode = parseInt(row[rowToField.responseStatus as keyof ExcelRow]);
+  let response: StadiusResponse = {statusCode, headers: {}, body: {}};
   const body = row[rowToField.responseBody as keyof ExcelRow];
 
   if (body) {
