@@ -1,18 +1,25 @@
-import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
+import { exec } from 'child_process';
+import { setup } from 'jest-dev-server';
 import { runTests } from 'stadius';
-import { AppModule } from './../src/app.module';
 
 describe('AppController (e2e)', () => {
-  let app: INestApplication;
+  beforeAll(async () => {
+    https: await setup({
+      command: `npm run start:dev`,
+      launchTimeout: 50000,
+      port: 3000,
+    });
+  });
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    app = moduleFixture.createNestApplication();
-    await app.init();
+  afterAll((done) => {
+    exec('lsof -ti tcp:3000 | xargs kill', (error) => {
+      if (error) {
+        console.log('ERROR:', error.toString());
+      } else {
+        console.log('Server stopped.');
+      }
+      done();
+    });
   });
 
   runTests([
