@@ -1,15 +1,18 @@
 ## Working with this example
 
 This example shows off how to work with Stadius's test runner.
-Stadius's intent is to run against a live system, therefore the project itself must run before the test script.
+Stadius's intent is to run against a live system.
 
-First install the dependencies for this project and run it in development mode:
+
+First install the dependencies:
 ```bash
 $ npm i
-$ npm run start:dev
 ```
 
-In another shell run the command bellow to trigger the test suite using Stadius and the swagger validator:
+Then, run the tests:
+The tests will start the development server.
+Depending on your terminal, after the test suite, you may need to send a termination signal (usually ctrl+c) to release the STDOUT/STDIN.
+
 ```bash
 $ npm run test:e2e
 ```
