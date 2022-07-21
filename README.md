@@ -140,7 +140,7 @@ hideFields(body); // after this call example will equal: {a: 'xxx', b: {a: 'xxx'
 Stadius uses environment variables for the configuration.
 For complete list of options please visit ```config.ts``` but the two most important ones are:
 ```
-VERBOSE_LOGGING - if set to true headers will also be logged. By default they are {}
+VERBOSE - if set to true headers will also be logged. By default they are {}
 SILENT - if set to true no log output will be made
 AUTH - if set the value will be added as Authorization header
 ```
