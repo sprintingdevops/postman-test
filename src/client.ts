@@ -159,6 +159,8 @@ export class Stadius {
       }
     } else if (Object.keys(body).length > 0) {
       req.send(body);
+    } else {
+      req.send();
     }
     const res = await req;
 
