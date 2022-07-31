@@ -116,18 +116,20 @@ export class Stadius {
       logMessages.push(obj);
       logMessages.push('\n');
     };
+
     push('++++++++++++++++++++++++++++++++++++++++++++++++++');
     push('REQUEST:');
     push({
       url: req.url,
       method: req.method,
+      ...(Config.VERBOSE ? {...headers} : {}),
       ...(headers && Config.VERBOSE ? {headers} : {}),
       ...(body ? {body} : {}),
     });
     push('RESPONSE:');
     push({
       status: res.status,
-      ...(res.headers && Config.VERBOSE ? {headers: res.headers} : {}),
+      ...(Config.VERBOSE ? {headers: res.headers} : {}),
       ...(res.body ? {body: res.body} : {}),
       ...(res.body && !Array.isArray(res.body) && !Object.keys(res.body).length && res.text ? {text: res.text} : {}),
     });
@@ -155,8 +157,10 @@ export class Stadius {
       for (const field of Object.keys(attachments)) {
         req.attach(field, attachments[field]);
       }
-    } else {
+    } else if (Object.keys(body).length > 0) {
       req.send(body);
+    } else {
+      req.send();
     }
     const res = await req;
 

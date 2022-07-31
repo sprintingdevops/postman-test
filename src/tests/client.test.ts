@@ -25,30 +25,27 @@ describe('sanity check client', () => {
   it('test GET', async () => {
     await client.GET('fakeurl', {foo: 'bar'});
     expect(send).toBeCalled();
-    expect(send).toBeCalledWith({});
   });
 
   it('test POST', async () => {
-    await client.POST('fakeurl', {}, {});
+    await client.POST('fakeurl', {}, {foo: 12});
     expect(send).toBeCalled();
-    expect(send).toBeCalledWith({});
+    expect(send).toBeCalledWith({foo: 12});
   });
 
   it('test PUT', async () => {
-    await client.PUT('fakeurl', {}, {});
+    await client.PUT('fakeurl', {}, {foo: 12});
     expect(send).toBeCalled();
-    expect(send).toBeCalledWith({});
+    expect(send).toBeCalledWith({foo: 12});
   });
 
   it('test PATCH', async () => {
     await client.PATCH('fakeurl', {}, {});
     expect(send).toBeCalled();
-    expect(send).toBeCalledWith({});
   });
 
   it('test DELETE', async () => {
     await client.DELETE('fakeurl', {});
     expect(send).toBeCalled();
-    expect(send).toBeCalledWith({});
   });
 });
