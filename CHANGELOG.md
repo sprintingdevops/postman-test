@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.0.12
+- Apply security patches
 ## 1.0.11
 - Fix: GET doesn't send body by default
 - Security patches
