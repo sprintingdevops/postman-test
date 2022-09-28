@@ -33,14 +33,5 @@ describe('Test Runner', () => {
         body: 'Hello world!',
       },
     },
-    {
-      name: 'JSON Array',
-      url: 'https://jsonkeeper.com/b/U4RQ',
-      request: {method: 'GET', query: {example: 'query_param'}}, // NOTE: query is used only for GET method.
-      response: {
-        statusCode: 200,
-        body: [1, 2, 3, 4, 5],
-      },
-    },
   ]);
 });
