@@ -16,7 +16,7 @@
     "prettier": "^2.6.2"
   },
   "devDependencies": {
-    "@types/jest": "29.2.0",
+    "@types/jest": "29.2.3",
     "@types/supertest": "2.0.12",
     "@typescript-eslint/eslint-plugin": "5.40.0",
     "@typescript-eslint/parser": "5.40.0",
