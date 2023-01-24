@@ -29,7 +29,7 @@
     "husky": "8.0.2",
     "majestic": "1.8.1",
     "prettier": "2.8.3",
-    "ts-jest": "28.0.8",
+    "ts-jest": "29.0.5",
     "typescript": "4.8.4"
   },
   "scripts": {
