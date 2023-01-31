@@ -37,18 +37,28 @@ export class Stadius {
     });
   }
 
-  public async PATCH(url: string, headers: Record<string, string> = {}, body: any): Promise<request.Response> {
+  public async PATCH(
+    url: string,
+    headers: Record<string, string> = {},
+    body: any,
+    attachments?: Record<string, string>,
+  ): Promise<request.Response> {
     const req: request.Test = request(this.getUrl(url)).patch('');
     Object.assign(headers, this._commonHeaders);
     Stadius.addHeaders(req, headers);
-    return this.send(req, headers, body);
+    return this.send(req, headers, body, attachments);
   }
 
-  public async PUT(url: string, headers: Record<string, string> = {}, body: any): Promise<request.Response> {
+  public async PUT(
+    url: string,
+    headers: Record<string, string> = {},
+    body: any,
+    attachments?: Record<string, string>,
+  ): Promise<request.Response> {
     const req: request.Test = request(this.getUrl(url)).put('');
     Object.assign(headers, this._commonHeaders);
     Stadius.addHeaders(req, headers);
-    return this.send(req, headers, body);
+    return this.send(req, headers, body, attachments);
   }
 
   public async POST(
